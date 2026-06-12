@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-// Uses cloud backend URL in production, localhost in development
+// Cloud backend URL
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || '/api',
+  baseURL: "https://emotion-learning-platform.onrender.com",
 });
 
-// Attach JWT token to every request
+// Attach JWT token
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
