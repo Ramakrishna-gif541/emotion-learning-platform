@@ -1,0 +1,71 @@
+name: Deploy to Cloud
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  # ─────────────────────────────────────────
+  # JOB 1: Deploy Frontend to Netlify
+  # ─────────────────────────────────────────
+  deploy-frontend:
+    name: Deploy Frontend → Netlify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build React app
+        working-directory: ./frontend
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        run: npm run build
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=frontend/build
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID:    ${{ secrets.NETLIFY_SITE_ID }}
+
+  # ─────────────────────────────────────────
+  # JOB 2: Deploy Backend to Railway
+  # ─────────────────────────────────────────
+  deploy-backend:
+    name: Deploy Backend → Railway
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        working-directory: ./backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --service backend
+
+  # ─────────────────────────────────────────
+  # JOB 3: Deploy ML API to Render
+  # ─────────────────────────────────────────
+  deploy-mlapi:
+    name: Deploy ML API → Render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Trigger Render deploy
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+          echo "ML API deploy triggered on Render"

@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Backend (Node.js)",
+      "program": "${workspaceFolder}/backend/server.js",
+      "envFile": "${workspaceFolder}/backend/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "python",
+      "request": "launch",
+      "name": "ML API (Flask)",
+      "program": "${workspaceFolder}/ml-api/app.py",
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (Backend + ML API)",
+      "configurations": ["Backend (Node.js)", "ML API (Flask)"]
+    }
+  ]
+}

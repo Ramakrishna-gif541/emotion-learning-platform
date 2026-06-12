@@ -1,0 +1,18 @@
+# Netlify configuration for React Frontend
+# Place this file in the root of your project
+
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "build"
+
+# Redirect all routes to index.html (React Router support)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# Environment variables (set these in Netlify dashboard too)
+[build.environment]
+  REACT_APP_API_URL = "https://your-backend.railway.app/api"
+  NODE_VERSION      = "18"

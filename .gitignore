@@ -1,0 +1,28 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Environment files (never commit these!)
+.env
+backend/.env
+frontend/.env
+
+# React build
+frontend/build/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# DeepFace model cache
+.deepface/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/settings.json

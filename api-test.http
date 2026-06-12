@@ -1,0 +1,60 @@
+### Smart Emotion Learning API Tests
+### Install "REST Client" extension in VS Code to run these
+
+@base = http://localhost:5000/api
+@token = PASTE_YOUR_TOKEN_HERE
+
+### Health Check
+GET {{base}}/health
+
+###
+
+### Register a new user
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test Student",
+  "email": "student@test.com",
+  "password": "password123"
+}
+
+###
+
+### Login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "student@test.com",
+  "password": "password123"
+}
+
+###
+
+### Get all courses
+GET {{base}}/courses
+Authorization: Bearer {{token}}
+
+###
+
+### Get adaptive content for course 1 (confused emotion)
+GET {{base}}/courses/1/content?emotion=confused
+Authorization: Bearer {{token}}
+
+###
+
+### Get emotion history
+GET {{base}}/emotion/history
+Authorization: Bearer {{token}}
+
+###
+
+### Get analytics summary
+GET {{base}}/analytics/summary
+Authorization: Bearer {{token}}
+
+###
+
+### ML API Health
+GET http://localhost:8000/health

@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-python.python",
+    "ms-python.flake8",
+    "formulahendry.auto-rename-tag",
+    "bradlc.vscode-tailwindcss",
+    "humao.rest-client",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-mysql"
+  ]
+}
