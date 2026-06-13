@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Cloud backend URL
 const API = axios.create({
-  baseURL: "https://emotion-learning-platform.onrender.com",
+  baseURL: "https://emotion-learning-platform.onrender.com/api",
 });
 
 // Attach JWT token
